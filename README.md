@@ -252,3 +252,4 @@ If you encounter issues or have questions:
 
 **⚡ Enjoy stable WiFi gaming on your Steam Deck! ⚡**
 # WiFiDiagnostic
+# WiFiDiagnostic
