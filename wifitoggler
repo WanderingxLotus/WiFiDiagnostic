@@ -1,0 +1,34 @@
+#!/bin/bash
+
+cleanup() {
+    echo "$(date): Caught termination signal. Exiting..."
+    exit 0
+}
+trap cleanup SIGTERM SIGINT
+
+MAX_LATENCY=100    # Max acceptable latency in ms
+CHECK_INTERVAL=10     # Time between checks (seconds)
+PING_HOST="8.8.8.8"       # Target host to ping
+
+while true; do
+    # Run ping with timeout to avoid hanging
+    PING_OUTPUT=$(timeout 10 ping -c 4 -q "$PING_HOST")
+
+    # Extract average latency in ms, rounded down
+    AVG_LATENCY=$(echo "$PING_OUTPUT" | grep -oP 'rtt [^=]+= \K[^/]+' | cut -d'.' -f1)
+
+    if [[ -z "$AVG_LATENCY" ]]; then
+        echo "$(date): Ping failed or timed out. Skipping check."
+    else
+        if (( AVG_LATENCY > MAX_LATENCY )); then
+            echo "$(date): High latency detected (${AVG_LATENCY}ms). Restarting Wi-Fi..."
+            rfkill block wifi
+            sleep 1
+            rfkill unblock wifi
+        else
+            echo "$(date): Ping OK (${AVG_LATENCY}ms)."
+        fi
+    fi
+
+    sleep "$CHECK_INTERVAL"
+done

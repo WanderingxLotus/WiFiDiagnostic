@@ -1,11 +1,10 @@
 {
-  "name": "Example Plugin",
-  "author": "John Doe",
-  "flags": ["debug", "_root"],
-  "api_version": 1,
+  "name": "WiFiDiagnostic",
+  "author": "itsmikethetech, Lotus",
+  "flags": ["_root"],
   "publish": {
-    "tags": ["template", "root"],
-    "description": "Decky example plugin.",
-    "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
+    "tags": ["utility", "network", "wifi", "diagnostic", "moonlight", "streaming"],
+    "description": "Professional WiFi monitoring and diagnostic plugin for Steam Deck with intelligent Moonlight stream detection, auto-switching restart methods, real-time latency monitoring, and comprehensive hardware diagnostics.",
+    "image": "https://raw.githubusercontent.com/itsmikethetech/LotusWiFi/main/assets/logo.png"
   }
 }

@@ -1,0 +1,13 @@
+[Unit]
+Description=Moonlight Wi-Fi toggler
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.config/systemd/user/wifitoggler
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
